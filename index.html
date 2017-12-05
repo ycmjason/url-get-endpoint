@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Get youtube embeded link</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Open Sans", arial, x-locale-body, sans-serif;
+      font-size: 2.5rem;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    
+    h2 small {
+      display: block;
+      font-weight: normal;
+      font-size: 0.5em;
+    }
+    
+    input[type=text] {
+      width: 100%;
+      height: 2.5em;
+      font-size: 1em;
+      border: 1px solid #dfdfdf;
+      padding-left: 0.5em;
+    }
+    
+    input[type=submit],
+    .button,
+    button {
+      display: block;
+      width: 100%;
+      border: 1px solid #D0D0D0;
+      background: #DDD;
+      color: #555;
+      text-transform: uppercase;
+      border-radius: 0;
+      line-height: 2.5em;
+      font-size: 1em;
+      margin: 1em auto;
+    }
+    
+    input[type=submit]:hover,
+    .button:hover,
+    button:hover {
+      cursor: pointer;
+      background: #D5D5D5;
+    }
+  </style>
+  <base target="_top">
+</head>
+
+<body>
+  <div class="container">
+    <h2>
+        Get the end point:
+        <small>Copy any link to the textbox below and hit submit.</small>
+      </h2>
+    <input id="link" placeholder="https://plnkr.co/edit/qntn6zEzpkrZDoAfmcHs?p=preview" type="text" name="link">
+    <button id="submit" onclick="submit()">Submit</button>
+
+    <div id="result"></div>
+  </div>
+  <script>
+    function getLink() {
+      return document.getElementById('link').value;
+    }
+
+    function getEndPoint(link) {
+      return link.substring(link.lastIndexOf('/')+1).match(/([^\?.]*)/)[1];
+    }
+
+    function writeResult(v) {
+      document.getElementById('result').innerHTML = v;
+    }
+
+    function submit() {
+      const ep = getEndPoint(getLink());
+      if (!ep) return;
+
+      let res = '';
+      res += 'End point: <br>' + ep;
+      writeResult(res);
+    }
+  </script>
+</body>
+
+</html>
